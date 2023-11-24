@@ -36,10 +36,6 @@
         [(and (<= 10 side) (< side 300))
          0.5]))))
 
-<<<<<<< HEAD
-
-       
-=======
 ;;; (axis number unit-length thickness) -> image?
 ;;;   number: positive-integer? (numbers in the axis)
 ;;;   unit-length: positive-real? (distance between two vertical little sticks)
@@ -86,10 +82,3 @@
   (lambda (length thickness)
     (rectangle length thickness "solid" "black")))
 
-
-(cartesian-axis-maker 800 1000)
-;(cartesian-axis-maker 800 800)
-;(cartesian-axis-maker 800 50)
-(cartesian-axis-maker 25 800)
-(cartesian-axis-maker 800 25)
->>>>>>> 1f6895fecf85a184f7541243dfc1ade801a25e72

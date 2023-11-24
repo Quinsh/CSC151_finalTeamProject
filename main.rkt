@@ -22,8 +22,8 @@
 (define background
   (lambda (width height)
     (overlay/xy (cartesian-axis-maker width height)
-                40 102 ;transform it into constant based on w and h
-                (cos-func (/ height 2.7)))))
+                (/ width 6) (/ height 2) 
+                (cos-func (/ width 2) height))))
   
 
 

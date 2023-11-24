@@ -8,12 +8,11 @@
 ;;; Creates part of a function similar to f(x) = cos(x).
 ;;; For this image, pi was rounded to 3.14
 (define cos-func
-  (lambda (height)
-    (let ([half-func (add-curve (rectangle 314 200 "solid" "transparent")
-                                0 200 0 0.3333
-                                314 0 0 0.3333
+  (lambda (width height)
+    (let ([half-func (add-curve (rectangle (/ width 1.5) (/ height 2.6) "solid" "transparent")
+                                0 (/ height 2.6) 0 0.3333
+                                (/ width 1.5) 0 0 0.3333
                                 "red")])
-      (scale (/ height 200)
              (beside
               half-func
-              (flip-horizontal half-func))))))
+              (flip-horizontal half-func)))))
