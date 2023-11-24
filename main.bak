@@ -3,8 +3,6 @@
 (require csc151)
 (require 2htdp/image)
 (require rackunit)
-(require "cos-function.rkt")
-(require "cartesian-axis-maker.rkt")
 
 #| 𝐇 𝐄 𝐀 𝐃 𝐄 𝐑 _____________________________
 
@@ -18,14 +16,3 @@
 |   - 
 |
 |#
-
-(define background
-  (lambda (width height)
-    (overlay/xy (cartesian-axis-maker width height)
-                40 102 ;transform it into constant based on w and h
-                (cos-func (/ height 2.7)))))
-  
-
-
-
-

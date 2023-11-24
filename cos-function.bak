@@ -1,7 +1,6 @@
 #lang racket
 (require csc151)
 (require 2htdp/image)
-(provide cos-func)
 
 ;;; (cos-func height) -> image?
 ;;;   height : real?
@@ -15,5 +14,7 @@
                                 "red")])
       (scale (/ height 200)
              (beside
+              half-func
+              (flip-horizontal half-func)
               half-func
               (flip-horizontal half-func))))))

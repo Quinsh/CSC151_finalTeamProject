@@ -1,7 +1,6 @@
 #lang racket
 (require 2htdp/image)
 (require csc151)
-(provide cartesian-axis-maker)
 
 (define cartesian-axis-maker
   (lambda (width height)
@@ -46,5 +45,9 @@
         [(and (<= 10 side) (< side 300))
          0.5]))))
 
-
+(cartesian-axis-maker 800 1000)
+;(cartesian-axis-maker 800 800)
+;(cartesian-axis-maker 800 50)
+(cartesian-axis-maker 25 800)
+(cartesian-axis-maker 800 25)
        
