@@ -80,5 +80,5 @@
 
 (define stick
   (lambda (length thickness)
-    (rectangle length thickness "solid" "black")))
+    (rectangle length thickness "solid" "white")))
 

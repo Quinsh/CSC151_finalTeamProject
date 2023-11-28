@@ -27,7 +27,7 @@
   (lambda (width height n)
     (overlay/align "middle" "bottom"
                    (reduce besidebottom (create-rectangle-list width height n))
-                   (empty-scene width height))))
+                   (empty-scene width height (make-color 0 0 0 0)))))
 
 (define besidebottom
   (lambda (a b)
