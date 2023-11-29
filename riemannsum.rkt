@@ -26,9 +26,29 @@
 (define make-riemannsum
   (lambda (width height n)
     (overlay/align "middle" "bottom"
-                   (reduce besidebottom (create-rectangle-list width height n))
+                   (image-map (colortransform n)
+                              (reduce besidebottom (create-rectangle-list width height n)))
                    (empty-scene width height (make-color 0 0 0 0)))))
 
+;;; (colortransform n) -> lambda?
+;;;   n : non-negative-integer (1~999)
+;;; returns a colortransforming fxn to be applied to image-map.
+;;; if n is smaller, the color transforming fxn doesn't change the color that much
+;;; if n is larger, the fxn transforms colors to become greener.
+(define colortransform
+  (lambda (n)
+    (let ([intensity (/ n 999 2)])
+      (lambda (c)
+        (if (equal? c (make-color 255 255 255 0))
+            (make-color 0 0 0 0)
+            (rgb (- (color-red c) (floor (* (color-red c) intensity)))
+                 (+ (color-green c) (floor (* (- 255 (color-green c)) intensity)))
+                 (+ (color-blue c))))))))
+
+;;; (besidebottom a b) -> image?
+;;;   a : image?
+;;;   b : image?
+;;; return a resulting image putting a b beside each other bottom aligned.
 (define besidebottom
   (lambda (a b)
     (beside/align "bottom" a b)))
@@ -86,8 +106,8 @@
            [middlecomp (lambda (comp1 comp2)
                          (round
                           (+ comp1 
-                            (* (- comp2 comp1)
-                               (/ pos maxpos)))))])
+                             (* (- comp2 comp1)
+                                (/ pos maxpos)))))])
       (rgb (middlecomp (color-red col1) (color-red col2))
            (middlecomp (color-green col1) (color-green col2))
            (middlecomp (color-blue col1) (color-blue col2))))))

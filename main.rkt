@@ -13,11 +13,14 @@
 | Mini Project 8
 | Authors: GunWoo Kim, Leonardo Nunes, Nicole Gonzalvez, Slok Rajbhandari
 | Date: 2023-11-22
-| Acknowledgements:
-|   - https://docs.racket-lang.org/guide/modules.html (to learn about modules)
-|   -
-|   - 
 |
+| ALL Acknowledgements (across every file):
+|
+|   - https://docs.racket-lang.org/guide/modules.html (to learn about modules)
+|   - https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._text%29%29 (to learn about text)
+|   - https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._cos%29%29
+|   - https://colorhunt.co/palette/ec8f5ef3b664f1eb909fbb73
+|  
 |#; __________________________________________
 
 
@@ -32,13 +35,72 @@
                 (cos-func (/ width 2) height))))
   
 
+;;; (finalimg width height n) -> image?
+;;;   width  : non-negative-integer?
+;;;   height : non-negative-integer?
+;;;   n      : non-negative-integer?
+;;; returns the final image with axis, curve and riemann sum. n increases the number of squares.
 (define finalimg
   (lambda (width height n)
-    (overlay
-     (overlay/xy (background width height)
-                 (/ width 6) (/ height 2)
-                 (make-riemannsum (/ width 1.5) (/ height 2.55) n))
-     (rectangle width height "solid" "black"))))
+    (overlay/align "center" "bottom"
+                   (area-txt (round (/ height 17)) n)
+                   (overlay/xy (background width height)
+                               (/ width 6) (/ height 2)
+                               (make-riemannsum (/ width 1.5) (/ height 2.55) n))
+                   (rectangle width height "solid" "black"))))
 
 
+;;; (image-series n width height) -> image?
+;;;   n : non-negtive-integer?
+;;;   width : non-negtive-integer?
+;;;   height : non-negtive-integer?
+;;; returns the final image
+(define image-series finalimg)
 
+
+;; _____________________________________________
+;; making a text to display the area.
+
+;;; (area-txt height n) -> image?
+;;;   height : non-negative-integer?
+;;;   n      : non-negative-integer?
+;;; returns a text of area approximated with n rectangles in riemann sum.
+(define area-txt
+  (lambda (height n)
+    (text (number->string (calc-area n)) height (col-n n))))
+
+;;; (calc-area n) -> inexact?
+;;;   n : non-negative-integer?
+;;; approximates cos(x)+1 with left riemann sum of 'n' squares
+(define calc-area
+  (lambda (n)
+    (let (; fxn(x) = cos(x) + 1
+          [fxn (lambda (x) (+ (cos x) 1))]
+          ; dx = 2pi/n
+          [dx (/ (* 2 pi) n)])
+      
+      (letrec (; helper calculates the sum of heights
+               [helper (lambda (x k)
+                         (if (zero? k)
+                             0
+                             (+ (fxn x)
+                                (helper (+ x dx) (- k 1)))))])
+        ; return dx * sum of heights
+        (* dx (helper (- pi) n))))))
+
+
+;;; (col-n n) -> color?
+;;;   n    : non-negative-integer?
+;;; returns a color between two colors based on n.
+(define col-n
+  (lambda (n)
+    (let* ([col1 (rgb 230 57 70)] ; or 252 246 189
+           [col2 (rgb 121 229 105)]
+           [middlecomp (lambda (comp1 comp2)
+                         (round
+                          (+ comp1 
+                             (* (- comp2 comp1)
+                                (/ n 999)))))])
+      (rgb (middlecomp (color-red col1) (color-red col2))
+           (middlecomp (color-green col1) (color-green col2))
+           (middlecomp (color-blue col1) (color-blue col2))))))
