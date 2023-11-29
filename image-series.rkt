@@ -7,33 +7,63 @@
 (require "cartesian-axis-maker.rkt")
 (require "riemannsum.rkt")
 
-#| 𝐇 𝐄 𝐀 𝐃 𝐄 𝐑 _____________________________
 
-| CSC-151 Fall 2023
-| Mini Project 8
-| Authors: GunWoo Kim, Leonardo Nunes, Nicole Gonzalvez, Slok Rajbhandari
-| Date: 2023-11-22
-|
-| ALL Acknowledgements (across every file):
-|
-|   - https://docs.racket-lang.org/guide/modules.html (to learn about modules)
-|   - https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._text%29%29 (to learn about text)
-|   - https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._cos%29%29
-|   - https://colorhunt.co/palette/ec8f5ef3b664f1eb909fbb73
-|  
-|#; __________________________________________
+;;; image-series.rkt
+;;;   The final project for CSC-151-01 2023Fa
+;;;
+;;; Authors: GunWoo Kim, Leonardo Nunes, Nicole Gonzalez, Slok Rajbhandari
+;;;
+;;; Date: YYYY-MM-DD
+;;;
+;;; Acknowledgements
+;;; - https://docs.racket-lang.org/guide/modules.html (to learn about modules)
+;;; - https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._text%29%29 (to learn about text)
+;;; - https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._cos%29%29
+;;; - https://colorhunt.co/palette/ec8f5ef3b664f1eb909fbb73 
+;;; * The project template comes from SamR.
+
+; +----------+-------------------------------------------------------
+; | Time log |
+; +----------+
+
+#|
+NAME    YYYY-MM-DD HH:MM-HH:MM  NN min  ACTIVITY
+NAME    YYYY-MM-DD HH:MM-HH:MM  NN min  ACTIVITY
+|#
+
+; +--------------+---------------------------------------------------
+; | Design goals |
+; +--------------+
+
+#|
 
 
-;;; (background width height) -> image?
-;;;   width  : non-negative-integer?
-;;;   height : non-negative-integer?
-;;; return an image of axis and f(x) together.
-(define background
-  (lambda (width height)
-    (overlay/xy (cartesian-axis-maker width height)
-                (/ width 6) (/ height 2) 
-                (cos-func (/ width 2) height))))
-  
+|#
+
+; +------------------------+-----------------------------------------
+; | Requirements checklist |
+; +------------------------+
+
+#|
+
+What are two image-making techniques you've used?  Where do you
+use them?
+
+???
+
+What are two instances of recursion in your program? 
+
+???
+
+Describe a piece of code that you are particularly of.
+
+???
+
+|#
+
+; +-------------------+----------------------------------------------
+; | Primary procedure |
+; +-------------------+
 
 ;;; (image-series width height n) -> image?
 ;;;   width  : non-negative-integer?
@@ -49,6 +79,21 @@
                                (/ width 6) (/ height 2)
                                (make-riemannsum (/ width 1.5) (/ height 2.55) n))
                    (rectangle width height "solid" "black"))))
+
+; +-------------------+----------------------------------------------
+; | Helper procedures |
+; +-------------------+
+
+
+;;; (background width height) -> image?
+;;;   width  : non-negative-integer?
+;;;   height : non-negative-integer?
+;;; return an image of axis and f(x) together.
+(define background
+  (lambda (width height)
+    (overlay/xy (cartesian-axis-maker width height)
+                (/ width 6) (/ height 2) 
+                (cos-func (/ width 2) height))))
 
 
 ;; _____________________________________________
