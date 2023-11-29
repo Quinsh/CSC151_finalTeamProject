@@ -35,12 +35,12 @@
                 (cos-func (/ width 2) height))))
   
 
-;;; (image-series width height n) -> image?
+;;; (finalimg width height n) -> image?
 ;;;   width  : non-negative-integer?
 ;;;   height : non-negative-integer?
 ;;;   n      : non-negative-integer?
 ;;; returns the final image with axis, curve and riemann sum. n increases the number of squares.
-(define image-series
+(define finalimg
   (lambda (width height n)
     (overlay/align "center" "bottom"
                    (area-txt (round (/ height 17)) n)
@@ -48,6 +48,14 @@
                                (/ width 6) (/ height 2)
                                (make-riemannsum (/ width 1.5) (/ height 2.55) n))
                    (rectangle width height "solid" "black"))))
+
+
+;;; (image-series n width height) -> image?
+;;;   n : non-negtive-integer?
+;;;   width : non-negtive-integer?
+;;;   height : non-negtive-integer?
+;;; returns the final image
+(define image-series finalimg)
 
 
 ;; _____________________________________________

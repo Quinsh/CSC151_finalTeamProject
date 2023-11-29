@@ -13,6 +13,6 @@
                                 0 (/ height 2.6) 0 0.3333
                                 (/ width 1.5) 0 0 0.3333
                                 "red")])
-             (beside
-              half-func
-              (flip-horizontal half-func)))))
+      (beside
+       half-func
+       (flip-horizontal half-func)))))
