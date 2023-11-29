@@ -39,7 +39,8 @@
 ;;;   width  : non-negative-integer?
 ;;;   height : non-negative-integer?
 ;;;   n      : non-negative-integer?
-;;; returns the final image with axis, curve and riemann sum. n increases the number of squares.
+;;; returns the final image with axis, curve and riemann sum.
+;;; n increases the number of squares.
 (define image-series
   (lambda (width height n)
     (overlay/align "center" "bottom"

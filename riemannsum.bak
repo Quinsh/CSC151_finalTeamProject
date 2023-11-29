@@ -22,8 +22,7 @@
 ;;;   width  : non-negative-integer?
 ;;;   height : non-negative-integer?
 ;;;   n      : non-negative-integer?
-;;; returns the image of riemann sum based on the parameters above. n means the
-;;; number of square, which can be from 1 to 999.
+;;; returns the image of riemann sum based on the parameters above. n means the number of square, which can be from 1 to 999.
 (define make-riemannsum
   (lambda (width height n)
     (overlay/align "middle" "bottom"
