@@ -4,8 +4,8 @@
 (provide cartesian-axis-maker)
 
 ;;; (cartesian-axis-maker width height) -> image?
-;;;   width: positive-integer? (equal or greater than 10)
-;;;   height: positive-integer? (equal or greater than 10)
+;;;   width : positive-integer? (equal or greater than 10)
+;;;   height : positive-integer? (equal or greater than 10)
 ;;; Generates a width-height image containing the upper part of a
 ;;; Cartesian Plane.
 (define cartesian-axis-maker
@@ -20,8 +20,8 @@
                (rectangle width height "outline" "black")))))
 
 ;;; (get-thickness width height) -> positive-real?
-;;;   width: positive-integer? (equal or greater than 10)
-;;;   height: positive-integer? (equal or greater than 10)
+;;;   width : positive-integer? (equal or greater than 10)
+;;;   height : positive-integer? (equal or greater than 10)
 ;;; Sets the thickness of the axis depending on the width and height.
 (define get-thickness
   (lambda (width height)
@@ -35,19 +35,19 @@
          0.5]))))
 
 ;;; (axis number unit-length thickness) -> image?
-;;;   number: positive-integer? (numbers in the axis)
-;;;   unit-length: positive-real? (distance between two vertical little sticks)
-;;;   thickness: positive-real?
+;;;   number : positive-integer? (numbers in the axis)
+;;;   unit-length : positive-real? (distance between two vertical little sticks)
+;;;   thickness : positive-real?
 ;;; Creates axis with "number" number of points.
 (define axis
   (lambda (number unit-length thickness)
     (axis/helper 1 (* (- number 1) 2) unit-length thickness)))
 
 ;;; (axis/helper pos len unit-length thickness) -> image?
-;;;   pos: positive-integer?
-;;;   len: positive-integer?
-;;;   unit-length: positive-real? (distance between two vertical little sticks)
-;;;   thickness: positive-real?
+;;;   pos : positive-integer?
+;;;   len : positive-integer?
+;;;   unit-length : positive-real? (distance between two vertical little sticks)
+;;;   thickness : positive-real?
 ;;; Creates axis with little sticks representing the units.
 (define axis/helper
   (lambda (pos len unit-length thickness)
@@ -57,9 +57,9 @@
                 (axis/helper (+ pos 1) len unit-length thickness)))))
 
 ;;; (get-stick number unit-length thickness) -> image?
-;;;   number: positive-integer? (numbers in the axis)
-;;;   unit-length: positive-real? (distance between two vertical little sticks)
-;;;   thickness: positive-real?
+;;;   number : positive-integer? (numbers in the axis)
+;;;   unit-length : positive-real? (distance between two vertical little sticks)
+;;;   thickness : positive-real?
 ;;; Returns the type of stick, if the number is even it gives
 ;;; a horizontal stick, when it is odd it gives a vertical stick.
 (define get-stick
@@ -69,8 +69,8 @@
         (stick thickness (* 10 thickness)))))
 
 ;;; (stick length thickness) -> image?
-;;;   length: positive-real?
-;;;   thickness: positive-real?
+;;;   length : positive-real?
+;;;   thickness : positive-real?
 ;;; Generates a stick with the given length and thickness.
 (define stick
   (lambda (length thickness)

@@ -3,7 +3,8 @@
 (require 2htdp/image)
 (provide cos-func)
 
-;;; (cos-func height) -> image?
+;;; (cos-func width height) -> image?
+;;;   width : real?
 ;;;   height : real?
 ;;; Creates part of a function similar to f(x) = cos(x).
 ;;; For this image, pi was rounded to 3.14

@@ -12,16 +12,16 @@
 ;;; made by Gunwoo / Slok
 
 ;;; (fxn x) -> number?
-;;;   x -> number?
+;;;   x : number?
 ;;; given x, should return cos(x) + 1
 (define fxn
   (lambda (x)
     (+ 1 (cos x))))
   
 ;;; (make-riemannsum width height n) -> image?
-;;;   width  : non-negative-integer?
+;;;   width : non-negative-integer?
 ;;;   height : non-negative-integer?
-;;;   n      : non-negative-integer?
+;;;   n : non-negative-integer?
 ;;; returns the image of riemann sum based on the parameters above. n means the
 ;;; number of square, which can be from 1 to 999.
 (define make-riemannsum
@@ -54,10 +54,10 @@
   (lambda (a b)
     (beside/align "bottom" a b)))
 
-;;; (create-rectangle-list) -> listof rectangles.
-;;;   width  : non-negative-integer?
+;;; (create-rectangle-list width height n) -> listof rectangles.
+;;;   width : non-negative-integer?
 ;;;   height : non-negative-integer?
-;;;   n      : non-negative-integer?
+;;;   n : non-negative-integer?
 ;;; returns the list of rectangles with the parameters provided above. n means the number of rectangles, which can be. from 1
 ;;; to 999. Thw width and the height of the rectangle are manipulated according to the width and the height provided by the user
 ;;; creating the reimann sum diagram.
@@ -65,10 +65,13 @@
   (lambda (width height n)
     (create-rectangle-list-helper n (- 0 pi) (/ width n) height 0 n)))
 
-;;; (create-rectangle-list-helper) -> listof rectangles.
-;;;   width  : non-negative-integer?
-;;;   height : non-negative-integer?
-;;;   n      : non-negative-integer?
+;;; (create-rectangle-list-helper n x dx max-y pos end) -> listof rectangles.
+;;;   n : non-negative-integer?
+;;;   x : real number?
+;;;   dx : real number?
+;;;   max-y : non-negative-integer?
+;;;   pos : non-negative-integer?
+;;;   end : non-negative-integer?
 ;;; This procedure appends the rectangles with the different width and height according to the parameters provided by the user.
 (define create-rectangle-list-helper
   (lambda (n x dx max-y pos end)
@@ -85,10 +88,12 @@
                                        (+ pos 1) 
                                        end)))))
 
-;;;(make-colored-rectangle dx x max-y) -> image?
-;;;   dx -> non-negative-integer?
-;;;   x -> non-negative-integer?
-;;;   max-y -> non-negative-integer?
+;;;(make-colored-rectangle dx x pos n max-y) -> image?
+;;;   dx : non-negative-integer?
+;;;   x : non-negative-integer?
+;;;   pos : non-negative-integer?
+;;;   n : non-negative-integer?
+;;;   max-y : non-negative-integer?
 (define make-colored-rectangle
   (lambda (dx x pos n max-y)
     (let ([color (color-pos pos n)])
@@ -97,7 +102,7 @@
 
   
 ;;; (color-pos pos maxpos) -> color?
-;;;   pos    : non-negative-integer?
+;;;   pos : non-negative-integer?
 ;;;   maxpos : non-negative-integer?
 ;;; returns a color between two colors based on the position.
 (define color-pos
